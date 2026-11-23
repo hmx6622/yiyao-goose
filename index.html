@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>药颐本草鹅 · 本草卤鹅坊 | 中医药 × 非遗卤鹅</title>
+<meta name="description" content="药颐本草鹅——安徽中医药大学人文与国际教育交流学院创新创业项目，以药食同源之智焕新定远非遗卤鹅。">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<style>
+:root{
+  --paper:#F4EFE5; --paper-2:#EBE3D4; --card-light:#FBF8F1;
+  --ink:#26221C; --ink-soft:#5F574A; --ink-faint:#8A8072;
+  --brown:#7A4A2B; --brown-deep:#5E3620;
+  --gold:#C6A15B; --gold-soft:#DCC08A;
+  --dark:#17130E; --dark-2:#211C15; --dark-3:#1B1610; --dark-card:#26201A;
+  --line-l:rgba(122,74,43,.16); --line-d:rgba(220,192,138,.15);
+  --serif:'Noto Serif SC',Georgia,'Songti SC',serif;
+  --sans:'Noto Sans SC',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  --wrap:1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.9;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+.serif{font-family:var(--serif)}
+
+/* ===== 进度条 ===== */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--brown),var(--gold));z-index:200;transition:width .1s linear}
+
+/* ===== 导航 ===== */
+.nav{position:fixed;top:0;left:0;width:100%;z-index:100;transition:background .4s,box-shadow .4s,border-color .4s;border-bottom:1px solid transparent}
+.nav-inner{max-width:var(--wrap);margin:0 auto;padding:0 28px;height:74px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;color:#F4EFE5;transition:color .4s}
+.brand .seal{width:34px;height:34px;border:1px solid var(--gold);border-radius:7px;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:15px;color:var(--gold);flex:none}
+.brand b{font-family:var(--serif);font-weight:700;font-size:19px;letter-spacing:.04em}
+.nav-links{display:flex;gap:34px;align-items:center}
+.nav-links a{font-size:14px;color:rgba(244,239,229,.82);letter-spacing:.05em;position:relative;transition:color .3s;font-weight:400}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nav-links a:hover{color:var(--gold-soft)}
+.nav-links a:hover::after{width:100%}
+.nav-tag{font-size:12px;letter-spacing:.18em;color:var(--gold);border:1px solid var(--line-d);padding:6px 14px;border-radius:40px}
+.nav.solid{background:rgba(244,239,229,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-l);box-shadow:0 6px 30px rgba(38,34,28,.05)}
+.nav.solid .brand{color:var(--ink)}
+.nav.solid .nav-links a{color:var(--ink-soft)}
+.nav.solid .nav-links a:hover{color:var(--brown)}
+.nav.solid .nav-tag{color:var(--brown);border-color:var(--line-l)}
+
+/* ===== 通用区块 ===== */
+section{position:relative}
+.pad{padding:clamp(84px,12vh,150px) 0}
+.dark{background:var(--dark);color:#EDE7DA}
+.dark-2{background:var(--dark-2);color:#EDE7DA}
+.dark-3{background:var(--dark-3);color:#EDE7DA}
+.eyebrow{display:flex;align-items:center;gap:14px;font-size:13px;letter-spacing:.26em;font-weight:500;text-transform:uppercase;color:var(--brown);margin-bottom:26px}
+.eyebrow::before{content:'';width:34px;height:1px;background:currentColor;opacity:.6}
+.dark .eyebrow,.dark-2 .eyebrow,.dark-3 .eyebrow{color:var(--gold)}
+.h2{font-family:var(--serif);font-weight:700;font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.25;letter-spacing:.01em;color:var(--ink)}
+.dark .h2,.dark-2 .h2,.dark-3 .h2{color:#F6F1E6}
+.lead{font-size:clamp(1rem,1.4vw,1.12rem);color:var(--ink-soft);max-width:640px;margin-top:22px;font-weight:300}
+.dark .lead,.dark-2 .lead,.dark-3 .lead{color:rgba(237,231,218,.66)}
+.head-center{text-align:center;display:flex;flex-direction:column;align-items:center}
+.head-center .eyebrow{justify-content:center}
+.head-center .lead{margin-left:auto;margin-right:auto}
+
+/* ===== 滚动 reveal ===== */
+.reveal{transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.js .reveal{opacity:0;transform:translateY(34px)}
+.reveal.in{opacity:1;transform:none}
+
+/* ===== Hero ===== */
+.hero{min-height:100vh;display:flex;align-items:center;background:var(--dark);color:#F4EFE5;padding:120px 0 70px;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-10%;right:-5%;width:60vw;height:60vw;background:radial-gradient(circle,rgba(198,161,91,.10),transparent 62%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:40px;align-items:center;position:relative;z-index:2}
+.hero-eyebrow{font-size:13px;letter-spacing:.24em;color:var(--gold);margin-bottom:30px;font-weight:400}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(3.2rem,8.4vw,7rem);line-height:1.04;letter-spacing:.02em}
+.hero h1 .au{color:var(--gold)}
+.hero-en{font-size:clamp(.8rem,1.5vw,1rem);letter-spacing:.42em;color:rgba(220,192,138,.7);margin-top:22px;font-weight:400;text-transform:uppercase}
+.hero-sub{font-family:var(--serif);font-size:clamp(1.15rem,2.2vw,1.6rem);color:#EFE8DA;margin-top:30px;font-weight:600;line-height:1.6}
+.hero-aux{font-size:1rem;color:rgba(237,231,218,.6);margin-top:18px;max-width:480px}
+.hero-badges{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.hero-badges span{font-size:12.5px;letter-spacing:.06em;color:var(--gold-soft);border:1px solid var(--line-d);padding:8px 16px;border-radius:40px;background:rgba(198,161,91,.05)}
+.hero-cta{display:flex;gap:16px;margin-top:42px;flex-wrap:wrap}
+.btn{font-size:14.5px;letter-spacing:.08em;padding:15px 32px;border-radius:4px;transition:.35s;font-weight:500;cursor:pointer;display:inline-block}
+.btn-gold{background:linear-gradient(120deg,var(--gold),var(--gold-soft));color:#231a10}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(198,161,91,.28)}
+.btn-ghost{border:1px solid var(--line-d);color:#EDE7DA}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold-soft)}
+.hero-visual{position:relative;display:flex;justify-content:center}
+.hero-visual img{width:108%;max-width:none;filter:drop-shadow(0 40px 60px rgba(0,0,0,.5));-webkit-mask-image:radial-gradient(ellipse 72% 72% at 52% 50%,#000 60%,transparent 100%);mask-image:radial-gradient(ellipse 72% 72% at 52% 50%,#000 60%,transparent 100%);animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+.scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:rgba(220,192,138,.6);font-size:11px;letter-spacing:.3em;z-index:2}
+.scroll-hint .mouse{width:22px;height:34px;border:1px solid rgba(220,192,138,.4);border-radius:12px;position:relative}
+.scroll-hint .mouse::after{content:'';position:absolute;top:7px;left:50%;transform:translateX(-50%);width:3px;height:7px;background:var(--gold);border-radius:2px;animation:wheel 1.8s infinite}
+@keyframes wheel{0%{opacity:0;top:7px}40%{opacity:1}80%{opacity:0;top:16px}}
+
+/* ===== 01 背景 ===== */
+.bg-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;align-items:center;margin-top:56px}
+.bg-text p{color:var(--ink-soft);margin-bottom:22px;font-size:1.02rem}
+.bg-text p strong{color:var(--brown-deep);font-weight:500}
+.quote{border-left:2px solid var(--gold);padding:6px 0 6px 26px;margin:34px 0;font-family:var(--serif);font-size:1.3rem;color:var(--brown-deep);font-weight:600;line-height:1.7}
+.quote small{display:block;font-family:var(--sans);font-size:.85rem;color:var(--ink-faint);font-weight:300;margin-top:10px;letter-spacing:.1em}
+.bg-facts{display:flex;gap:0;margin-top:38px;border-top:1px solid var(--line-l)}
+.bg-facts div{flex:1;padding:22px 18px 0 0}
+.bg-facts .k{font-family:var(--serif);font-size:1.5rem;color:var(--brown);font-weight:700}
+.bg-facts .v{font-size:.82rem;color:var(--ink-faint);letter-spacing:.08em;margin-top:4px}
+.bg-visual{position:relative;display:flex;justify-content:center}
+.bg-ring{width:min(420px,86%);aspect-ratio:1;border-radius:50%;padding:14px;border:1px solid var(--line-l);position:relative;background:radial-gradient(circle at 50% 40%,#fff,var(--paper-2))}
+.bg-ring::before{content:'';position:absolute;inset:-14px;border-radius:50%;border:1px solid var(--line-l)}
+.bg-ring img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.bg-cap{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);background:var(--card-light);border:1px solid var(--line-l);padding:9px 22px;border-radius:40px;font-size:12.5px;letter-spacing:.12em;color:var(--brown);white-space:nowrap;box-shadow:0 10px 30px rgba(38,34,28,.07)}
+
+/* ===== 02 时间轴 ===== */
+.timeline{margin-top:70px;position:relative}
+.tl-line{position:absolute;top:13px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--brown) 12%,var(--gold) 88%,transparent)}
+.tl-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:22px}
+.tl-node{position:relative;padding-top:46px}
+.tl-node::before{content:'';position:absolute;top:7px;left:0;width:13px;height:13px;border-radius:50%;background:var(--dark-2);border:2px solid var(--gold);box-shadow:0 0 0 5px rgba(198,161,91,.1)}
+.tl-year{font-family:var(--serif);font-size:1.35rem;font-weight:700;color:var(--gold-soft);line-height:1.2}
+.tl-title{font-size:.98rem;font-weight:500;color:#F2ECDF;margin:12px 0 10px;letter-spacing:.04em}
+.tl-desc{font-size:.84rem;color:rgba(237,231,218,.56);line-height:1.85;font-weight:300}
+
+/* ===== 03 核心优势 ===== */
+.adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:60px}
+.adv-card{background:linear-gradient(160deg,var(--dark-card),#1e1812);border:1px solid var(--line-d);border-radius:14px;padding:44px 36px 40px;transition:.45s;position:relative;overflow:hidden}
+.adv-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--brown),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .5s}
+.adv-card:hover{transform:translateY(-10px);border-color:rgba(198,161,91,.4);box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.adv-card:hover::after{transform:scaleX(1)}
+.adv-num{font-family:var(--serif);font-size:3.4rem;font-weight:900;color:var(--gold);line-height:1;opacity:.92}
+.adv-card h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:#F6F1E6;margin:24px 0 18px}
+.adv-card p{font-size:.92rem;color:rgba(237,231,218,.62);line-height:1.95}
+.adv-tag{display:inline-block;margin-top:24px;font-size:11.5px;letter-spacing:.1em;color:var(--gold-soft);border:1px solid var(--line-d);padding:5px 13px;border-radius:30px}
+
+/* ===== 04 产品矩阵 ===== */
+.herbs-banner{margin:54px 0 50px;border-radius:16px;overflow:hidden;position:relative;border:1px solid var(--line-l);box-shadow:0 24px 60px rgba(38,34,28,.1)}
+.herbs-banner img{width:100%;height:clamp(240px,34vw,400px);object-fit:cover}
+.herbs-banner .cap{position:absolute;left:0;bottom:0;padding:26px 34px;background:linear-gradient(0deg,rgba(23,19,14,.78),transparent);width:100%;color:#F4EFE5}
+.herbs-banner .cap b{font-family:var(--serif);font-size:1.3rem;font-weight:700;display:block}
+.herbs-banner .cap span{font-size:.85rem;color:rgba(244,239,229,.75);letter-spacing:.08em}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.prod-card{background:var(--card-light);border:1px solid var(--line-l);border-radius:14px;padding:34px 28px 32px;transition:.4s;position:relative}
+.prod-card::before{content:'';position:absolute;top:0;left:28px;right:28px;height:3px;border-radius:0 0 3px 3px;background:var(--brown);opacity:.85}
+.prod-card:hover{transform:translateY(-8px);box-shadow:0 26px 50px rgba(38,34,28,.1);border-color:rgba(122,74,43,.3)}
+.prod-eff{font-size:12px;letter-spacing:.08em;color:var(--brown);background:rgba(122,74,43,.08);display:inline-block;padding:5px 13px;border-radius:30px;font-weight:500}
+.prod-card h3{font-family:var(--serif);font-size:1.9rem;font-weight:900;color:var(--ink);margin:20px 0 6px}
+.prod-sub{font-size:.86rem;color:var(--ink-faint);margin-bottom:20px}
+.prod-herbs{border-top:1px solid var(--line-l);padding-top:18px;font-size:.92rem;color:var(--ink-soft)}
+.prod-herbs em{font-style:normal;color:var(--brown-deep);font-weight:500}
+
+/* ===== 05 工艺 ===== */
+.craft-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:60px}
+.craft-card{background:var(--dark-card);border:1px solid var(--line-d);border-radius:14px;padding:26px 24px 30px;transition:.4s;text-align:center}
+.craft-card:hover{transform:translateY(-8px);border-color:rgba(198,161,91,.38);box-shadow:0 26px 50px rgba(0,0,0,.36)}
+.craft-img{width:100%;aspect-ratio:1;border-radius:10px;overflow:hidden;margin-bottom:22px;background:#221d17}
+.craft-img img{width:100%;height:100%;object-fit:cover}
+.craft-step{font-size:12px;letter-spacing:.2em;color:var(--gold);font-weight:500}
+.craft-card h3{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:#F6F1E6;margin:8px 0 14px}
+.craft-card p{font-size:.86rem;color:rgba(237,231,218,.6);line-height:1.9;text-align:left}
+.craft-note{text-align:center;margin-top:40px;font-size:.9rem;color:rgba(237,231,218,.5);letter-spacing:.06em}
+.craft-note b{color:var(--gold-soft);font-weight:500}
+
+/* ===== 06 数据 ===== */
+.data-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:64px}
+.data-item{text-align:center;position:relative}
+.data-item+.data-item::before{content:'';position:absolute;left:-15px;top:14%;height:72%;width:1px;background:var(--line-d)}
+.data-num{font-family:var(--serif);font-weight:900;font-size:clamp(2.8rem,5.6vw,4.6rem);line-height:1;color:var(--gold);letter-spacing:.01em}
+.data-num .u{font-size:.42em;color:var(--gold-soft);margin-left:2px;font-weight:700}
+.data-label{font-size:.92rem;color:rgba(237,231,218,.66);margin-top:18px;letter-spacing:.04em}
+.data-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 40px;margin-top:64px;padding-top:40px;border-top:1px solid var(--line-d)}
+.data-strip span{font-size:.9rem;color:rgba(237,231,218,.6)}
+.data-strip b{color:var(--gold-soft);font-family:var(--serif);font-weight:700;font-size:1.05rem}
+.data-src{text-align:center;margin-top:30px;font-size:.78rem;color:rgba(237,231,218,.34);letter-spacing:.08em}
+
+/* ===== 07 团队 ===== */
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px}
+.team-card{background:var(--card-light);border:1px solid var(--line-l);border-radius:14px;padding:36px 34px;transition:.4s}
+.team-card:hover{box-shadow:0 22px 46px rgba(38,34,28,.08);transform:translateY(-5px)}
+.team-role{font-size:12px;letter-spacing:.18em;color:var(--brown);font-weight:500}
+.team-card h3{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--ink);margin:12px 0 14px}
+.team-card h3 small{font-family:var(--sans);font-size:.9rem;color:var(--ink-faint);font-weight:400;margin-left:10px}
+.team-card p{font-size:.92rem;color:var(--ink-soft);line-height:1.95}
+.partner{margin-top:24px;background:var(--card-light);border:1px solid var(--line-l);border-radius:14px;padding:34px}
+.partner .t{font-size:12px;letter-spacing:.18em;color:var(--brown);font-weight:500;margin-bottom:18px}
+.partner .tags{display:flex;flex-wrap:wrap;gap:12px}
+.partner .tags span{font-size:.9rem;color:var(--ink-soft);border:1px solid var(--line-l);padding:9px 18px;border-radius:40px;background:#fff}
+.mode-line{margin-top:26px;text-align:center;font-family:var(--serif);font-size:1.15rem;color:var(--brown-deep);font-weight:600;letter-spacing:.04em}
+
+/* ===== Footer ===== */
+.footer{background:var(--dark);color:rgba(237,231,218,.6);padding:80px 0 40px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid var(--line-d)}
+.foot-brand .brand{color:#F4EFE5;margin-bottom:20px}
+.foot-brand p{font-size:.9rem;max-width:300px;line-height:1.9}
+.foot-col h4{font-size:13px;letter-spacing:.14em;color:var(--gold);margin-bottom:20px;font-weight:500}
+.foot-col a{display:block;font-size:.9rem;margin-bottom:13px;color:rgba(237,231,218,.6);transition:.3s}
+.foot-col a:hover{color:var(--gold-soft)}
+.foot-bottom{padding-top:30px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.8rem;color:rgba(237,231,218,.4);letter-spacing:.04em}
+
+/* ===== 响应式 ===== */
+@media(max-width:980px){
+  .nav-links{display:none}
+  .hero-grid{grid-template-columns:1fr;gap:20px}
+  .hero-visual{order:-1;margin-bottom:10px}
+  .hero-visual img{width:80%;margin:0 auto}
+  .hero{min-height:auto;padding:110px 0 80px}
+  .scroll-hint{display:none}
+  .bg-grid{grid-template-columns:1fr;gap:50px}
+  .bg-visual{order:-1}
+  .adv-grid,.prod-grid,.craft-grid,.data-grid{grid-template-columns:repeat(2,1fr)}
+  .tl-grid{grid-template-columns:1fr;gap:0}
+  .tl-line{left:6px;right:auto;top:0;bottom:0;width:1px;height:auto;background:linear-gradient(180deg,transparent,var(--brown) 8%,var(--gold) 92%,transparent)}
+  .tl-node{padding:0 0 36px 36px}
+  .tl-node::before{top:4px;left:0}
+  .data-item+.data-item::before{display:none}
+  .team-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:34px}
+}
+@media(max-width:560px){
+  .wrap{padding:0 20px}
+  .nav-inner{padding:0 20px}
+  .nav-tag{display:none}
+  .adv-grid,.prod-grid,.craft-grid,.data-grid{grid-template-columns:1fr}
+  .bg-facts{flex-wrap:wrap}
+  .bg-facts div{flex:1 1 40%}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-cta .btn{flex:1;text-align:center}
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<div id="progress"></div>
+
+<!-- ===== 导航 ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="seal">药颐</span><b>药颐本草鹅</b></a>
+    <div class="nav-links">
+      <a href="#background">项目背景</a>
+      <a href="#heritage">工艺传承</a>
+      <a href="#advantage">核心优势</a>
+      <a href="#products">本草矩阵</a>
+      <a href="#data">项目实力</a>
+      <a href="#team">团队背书</a>
+    </div>
+    <span class="nav-tag">本草卤鹅坊</span>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <div class="hero-eyebrow reveal">安徽中医药大学 · 人文与国际教育交流学院</div>
+      <h1 class="reveal">药颐<span class="au">本草</span>鹅</h1>
+      <div class="hero-en reveal">Yaoyi Herbal Braised Goose</div>
+      <div class="hero-sub reveal">中医药 × 非遗卤鹅<br>以药食同源之智，焕新六百年江淮风味。</div>
+      <p class="hero-aux reveal">一只卤鹅，承载非遗技艺与本草养生；让传统美味，越吃越健康。</p>
+      <div class="hero-badges reveal">
+        <span>滁州市级非物质文化遗产</span>
+        <span>药食同源 · 四款本草配方</span>
+        <span>皖西白鹅 · 国家级保护品种</span>
+      </div>
+      <div class="hero-cta reveal">
+        <a href="#background" class="btn btn-gold">了解项目</a>
+        <a href="#products" class="btn btn-ghost">查看本草矩阵</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/HBxTbRS1UoQCiUxP1hcccsOgnRf" alt="药颐本草鹅主视觉 · 写实3D卤鹅">
+    </div>
+  </div>
+  <div class="scroll-hint"><span class="mouse"></span>SCROLL</div>
+</header>
+
+<!-- ===== 01 项目背景 ===== -->
+<section class="pad" id="background">
+  <div class="wrap">
+    <div class="eyebrow reveal">01 — 项目背景</div>
+    <h2 class="h2 reveal">一味卤鹅，六百年江淮风味</h2>
+    <div class="bg-grid">
+      <div class="bg-text reveal">
+        <p>定远卤鹅，亦名定城卤鹅，其源可追溯至<strong>明朝戚继光时期</strong>。定远方言中"鹅"与"倭"同音，戚家军出征前食鹅，寓意抗倭胜利、荣耀归来，故又称"抗倭之鹅""胜利之鹅"。</p>
+        <p><strong>2021 年</strong>，定远卤鹅制作技艺被列入滁州市市级非物质文化遗产代表性名录。然而口味单一、传承式微，让这一地标美食一度面临失传之境。</p>
+        <p>安徽中医药大学创新创业团队深入定远乡村调研，依托中医药专业优势，从<strong>药食同源目录</strong>中精选本草入卤，提出"中医药＋卤鹅"创新模式，让非遗美味兼具养生之效。</p>
+        <div class="quote">"空腹食之为食物，患者食之为药物。"<small>——《黄帝内经》</small></div>
+        <div class="bg-facts">
+          <div><div class="k">明朝</div><div class="v">卤鹅起源</div></div>
+          <div><div class="k">2021</div><div class="v">列入市级非遗</div></div>
+          <div><div class="k">皖西白鹅</div><div class="v">国家级保护品种</div></div>
+        </div>
+      </div>
+      <div class="bg-visual reveal">
+        <div class="bg-ring">
+          <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/Xka6bhny4oL4PlxdycrcLVqnnXe" alt="本草卤鹅场景 · 药食同源">
+        </div>
+        <span class="bg-cap">本草卤鹅 · 药食同源</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 02 工艺传承时间轴 ===== -->
+<section class="pad dark-2" id="heritage">
+  <div class="wrap">
+    <div class="eyebrow reveal">02 — 工艺传承</div>
+    <h2 class="h2 reveal">从抗倭之鹅，到本草卤鹅</h2>
+    <p class="lead reveal">六百年技艺薪火相传，一朝本草焕新。一条时间线，见证非遗美食的守正与创新。</p>
+    <div class="timeline reveal">
+      <div class="tl-line"></div>
+      <div class="tl-grid">
+        <div class="tl-node"><div class="tl-year">明朝</div><div class="tl-title">卤鹅起源</div><div class="tl-desc">戚家军出征食鹅，"鹅""倭"同音，寓意抗倭胜利，卤制技艺由此流传。</div></div>
+        <div class="tl-node"><div class="tl-year">改革开放</div><div class="tl-title">品牌注册</div><div class="tl-desc">"定城卤鹅"注册品牌商标，三十余年卤味传承，风味遍布各地。</div></div>
+        <div class="tl-node"><div class="tl-year">2021</div><div class="tl-title">列入非遗</div><div class="tl-desc">定远卤鹅制作技艺入选滁州市市级非物质文化遗产代表性名录。</div></div>
+        <div class="tl-node"><div class="tl-year">2025</div><div class="tl-title">项目立项</div><div class="tl-desc">团队实地调研，提出"中医药＋卤鹅"创新概念，本草卤鹅坊启航。</div></div>
+        <div class="tl-node"><div class="tl-year">2026</div><div class="tl-title">研发成型</div><div class="tl-desc">四款本草卤鹅研发落地，专利饲养与政企合作同步推进。</div></div>
+        <div class="tl-node"><div class="tl-year">2030</div><div class="tl-title">产业愿景</div><div class="tl-desc">迈向"百亿元鹅产业"，三年养殖规模目标 5000 万只，助力乡村振兴。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 03 核心工艺优势 ===== -->
+<section class="pad dark-3" id="advantage">
+  <div class="wrap">
+    <div class="eyebrow reveal">03 — 核心优势</div>
+    <h2 class="h2 reveal">三重匠心，一味传承</h2>
+    <p class="lead reveal">从源头养殖到古法卤制，以专利技术与非遗配方，构筑差异化竞争壁垒。</p>
+    <div class="adv-grid">
+      <div class="adv-card reveal">
+        <div class="adv-num">01</div>
+        <h3>严选散养白鹅</h3>
+        <p>选用皖西白鹅——安徽唯一列入《国家级畜禽遗传资源保护名录》的地方家禽品种。半封闭式棚舍高效饲养专利＋中医药复方饲料喂养专利，从源头保障肉质与品质。</p>
+        <span class="adv-tag">国家级保护品种 · 双专利饲养</span>
+      </div>
+      <div class="adv-card reveal">
+        <div class="adv-num">02</div>
+        <h3>百年老卤配方</h3>
+        <p>承袭非遗卤料世家古方，川椒、南姜、八角、桂皮、甘草、丁香慢熬成卤；再依药食同源理论科学配伍本草，古方有据，风味独特，辨识度强。</p>
+        <span class="adv-tag">非遗古方 · 本草配伍</span>
+      </div>
+      <div class="adv-card reveal">
+        <div class="adv-num">03</div>
+        <h3>恒温浸卤技法</h3>
+        <p>精盐腌制后入卤，恒温浸煮约 90 分钟，期间吊起离汤反复四次、翻转入味，精确控温控时，成就咸香适中、余味悠长的一致品质。</p>
+        <span class="adv-tag">恒温控时 · 吊汤四次</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04 本草产品矩阵 ===== -->
+<section class="pad" id="products">
+  <div class="wrap">
+    <div class="eyebrow reveal">04 — 本草矩阵</div>
+    <h2 class="h2 reveal">四款本草，对症而养</h2>
+    <p class="lead reveal">依药食同源理论，针对不同体质与需求研发四款功效卤鹅。问卷调研中，88.1% 受访者愿意向亲友推荐。</p>
+    <div class="herbs-banner reveal">
+      <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/NUSFb5mh8ofY8CxW5h8cZ5dZnrh" alt="天然卤料与药食同源本草">
+      <div class="cap"><b>天然卤料 · 药食同源本草</b><span>八角 · 桂皮 · 香叶 · 草果 · 枸杞 · 红枣，科学配伍，古方有据。</span></div>
+    </div>
+    <div class="prod-grid">
+      <div class="prod-card reveal">
+        <span class="prod-eff">润肠通便</span>
+        <h3>知心鹅</h3>
+        <div class="prod-sub">调理脾胃 · 润脏腑通三焦</div>
+        <div class="prod-herbs">本草配伍<br><em>黑芝麻 · 甜杏仁 · 蜂蜜</em></div>
+      </div>
+      <div class="prod-card reveal">
+        <span class="prod-eff">清热解火</span>
+        <h3>叶苓鹅</h3>
+        <div class="prod-sub">清热泻火 · 生津解暑</div>
+        <div class="prod-herbs">本草配伍<br><em>荷叶 · 茯苓</em></div>
+      </div>
+      <div class="prod-card reveal">
+        <span class="prod-eff">健胃消食</span>
+        <h3>麦谷鹅</h3>
+        <div class="prod-sub">健脾开胃 · 消食化积</div>
+        <div class="prod-herbs">本草配伍<br><em>麦芽 · 谷芽 · 山楂</em></div>
+      </div>
+      <div class="prod-card reveal">
+        <span class="prod-eff">美容养颜</span>
+        <h3>凝脂鹅</h3>
+        <div class="prod-sub">宁心安神 · 美容润肤</div>
+        <div class="prod-herbs">本草配伍<br><em>木瓜 · 百合</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 05 古法工艺流程 ===== -->
+<section class="pad dark-2" id="craft">
+  <div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow reveal">05 — 古法工艺</div>
+      <h2 class="h2 reveal">六道工序，一味入魂</h2>
+      <p class="lead reveal">承袭定远卤鹅世家古法，每一步皆严格操作，方成就一致而稳定的非遗风味。</p>
+    </div>
+    <div class="craft-grid">
+      <div class="craft-card reveal">
+        <div class="craft-img"><img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/OHnVbDqb0oMdGBxrzZTcPFWZnye" alt="选鹅"></div>
+        <div class="craft-step">STEP 01</div>
+        <h3>选鹅</h3>
+        <p>严选皖西白鹅，开腹取出内脏，净洗晾干，备料待制。</p>
+      </div>
+      <div class="craft-card reveal">
+        <div class="craft-img"><img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/CdKdbj6twofLtMxNL3RcRdUYnRh" alt="腌制"></div>
+        <div class="craft-step">STEP 02</div>
+        <h3>腌制</h3>
+        <p>精盐抹遍鹅身内外，竹筷挺于腹腔，定味去腥，奠定基础咸香。</p>
+      </div>
+      <div class="craft-card reveal">
+        <div class="craft-img"><img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/If1hbtI4XoXEyGxhAF1c9u2Ange" alt="熬卤"></div>
+        <div class="craft-step">STEP 03</div>
+        <h3>熬卤</h3>
+        <p>川椒南姜八角桂皮甘草丁香包扎成球，加酱油冰糖香茅加饭酒，中火烧沸。</p>
+      </div>
+      <div class="craft-card reveal">
+        <div class="craft-img"><img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/RvIcbTnHlokSIIxJSEUcG9Z8n7e" alt="浸卤"></div>
+        <div class="craft-step">STEP 04</div>
+        <h3>浸卤</h3>
+        <p>入卤恒温浸煮约 90 分钟，吊汤四次、翻转入味，捞起放晾待用。</p>
+      </div>
+    </div>
+    <p class="craft-note reveal">另含 <b>清洗</b> 与 <b>切件淋汁</b>，共成六道工序 —— 切厚片、淋卤汁，湿润即成。</p>
+  </div>
+</section>
+
+<!-- ===== 06 项目实力数据 ===== -->
+<section class="pad dark" id="data">
+  <div class="wrap">
+    <div class="head-center">
+      <div class="eyebrow reveal">06 — 项目实力</div>
+      <h2 class="h2 reveal">以数据，见证乡村振兴</h2>
+      <p class="lead reveal">扎根定远白鹅产业，以"企业＋基地＋农户"模式，带动就业与区域经济可持续发展。</p>
+    </div>
+    <div class="data-grid">
+      <div class="data-item reveal"><div class="data-num"><span data-count="650">650</span><span class="u">万+</span></div><div class="data-label">定远肉鹅年出栏（只）</div></div>
+      <div class="data-item reveal"><div class="data-num"><span data-count="203">203</span><span class="u">家</span></div><div class="data-label">年出栏万只以上规模养殖户</div></div>
+      <div class="data-item reveal"><div class="data-num"><span data-count="10000">10,000</span><span class="u">+</span></div><div class="data-label">预计带动就业岗位（个）</div></div>
+      <div class="data-item reveal"><div class="data-num"><span data-count="88.1" data-dec="1">88.1</span><span class="u">%</span></div><div class="data-label">调研受访者推荐意愿</div></div>
+    </div>
+    <div class="data-strip reveal">
+      <span>年均出栏增长 <b>5%</b></span>
+      <span>三年养殖规模目标 <b>5000 万只</b></span>
+      <span>第五年营收目标 <b>120.3 万元</b></span>
+      <span>产业愿景 <b>百亿元鹅产业</b></span>
+    </div>
+    <p class="data-src reveal">数据来源：项目计划书市场调研与财务预测</p>
+  </div>
+</section>
+
+<!-- ===== 07 团队与背书 ===== -->
+<section class="pad" id="team">
+  <div class="wrap">
+    <div class="eyebrow reveal">07 — 团队背书</div>
+    <h2 class="h2 reveal">产学研协同，专业护航</h2>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-role">指导教师</div>
+        <h3>张筱荣 <small>教授 · 博士后</small></h3>
+        <p>人文与国际教育交流学院副院长，安徽省一流专业与一流课程负责人，全国大学生电子商务"三创赛"优秀指导教师，长期从事创新创业竞赛辅导，主持省部级以上课题 20 余项。</p>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-role">技术顾问</div>
+        <h3>彭青和 <small>副教授 · 硕士生导师</small></h3>
+        <p>澳大利亚国立大学访问学者，全国"挑战杯"竞赛优秀指导老师，研究方向为中医药健康管理与教育，主持省部级课题 10 项，指导团队获省级以上奖励 30 余项。</p>
+      </div>
+    </div>
+    <div class="partner reveal">
+      <div class="t">多元团队 · 政企合作</div>
+      <div class="tags">
+        <span>医学 · 食品 · 计算机 · 药学 · 人力资源多元专业</span>
+        <span>定远县人民政府</span>
+        <span>皖西白鹅育种基地与屠宰厂</span>
+        <span>鑫荣中草药种植有限公司</span>
+        <span>朱马卤鹅手艺传承人</span>
+        <span>八两文化</span>
+      </div>
+      <div class="mode-line">企业＋基地＋农户 · O2O＋O2B · 线上＋线下</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand"><span class="seal">药颐</span><b>药颐本草鹅</b></a>
+        <p>传承非遗卤味 · 弘扬本草养生 · 助力乡村振兴。以药食同源之智，让定远卤鹅焕发时代生命力。</p>
+      </div>
+      <div class="foot-col">
+        <h4>项目</h4>
+        <a href="#background">项目背景</a>
+        <a href="#heritage">工艺传承</a>
+        <a href="#advantage">核心优势</a>
+      </div>
+      <div class="foot-col">
+        <h4>产品</h4>
+        <a href="#products">本草矩阵</a>
+        <a href="#craft">古法工艺</a>
+        <a href="#data">项目实力</a>
+      </div>
+      <div class="foot-col">
+        <h4>关于</h4>
+        <a href="#team">团队背书</a>
+        <a href="#team">政企合作</a>
+        <a href="#top">返回顶部</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 本草卤鹅坊 · 安徽中医药大学人文与国际教育交流学院创新创业项目</span>
+      <span>本页面为项目展示用途，数据源自项目计划书</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// 导航滚动状态 + 进度条
+const nav=document.getElementById('nav'),prog=document.getElementById('progress');
+function onScroll(){
+  const y=window.scrollY;
+  nav.classList.toggle('solid',y>60);
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(h>0?(y/h*100):0)+'%';
+}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+// 滚动 reveal（渐进增强：无 JS 或 IO 不可用时内容默认可见）
+const revealEls=document.querySelectorAll('.reveal');
+// 首屏内容立即显示，杜绝任何环境下首屏空白
+document.querySelectorAll('.hero .reveal').forEach(el=>el.classList.add('in'));
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+  revealEls.forEach((el,i)=>{el.style.transitionDelay=(i%4*0.08)+'s';io.observe(el);});
+  // 兜底：1.8s 后仍未触发的元素强制显示
+  setTimeout(()=>revealEls.forEach(el=>el.classList.add('in')),1800);
+}else{
+  revealEls.forEach(el=>el.classList.add('in'));
+}
+
+// 数字滚动
+function animateCount(el){
+  const target=parseFloat(el.dataset.count),dec=parseInt(el.dataset.dec||'0'),dur=1600,t0=performance.now();
+  function tick(t){
+    let p=Math.min((t-t0)/dur,1);p=1-Math.pow(1-p,3);
+    const val=target*p;
+    el.textContent=dec?val.toFixed(dec):Math.round(val).toLocaleString('en-US');
+    if(p<1)requestAnimationFrame(tick);else el.textContent=dec?target.toFixed(dec):Math.round(target).toLocaleString('en-US');
+  }
+  requestAnimationFrame(tick);
+}
+if('IntersectionObserver' in window){
+  const cio=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){animateCount(e.target);cio.unobserve(e.target);}});
+  },{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+}
+</script>
+</body>
+</html>
